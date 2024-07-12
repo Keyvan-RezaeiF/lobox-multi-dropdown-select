@@ -1,0 +1,35 @@
+.input-container {
+  position: relative;
+}
+
+.text-input {
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.chevron {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+  cursor: pointer;
+}
+
+.items {
+  border: 1px solid black;
+  border-radius: 12px;
+  margin-top: 4px;
+  max-height: 100px;
+  overflow-y: scroll;
+  padding: 2px 8px;
+  user-select: none;
+}
+
+.item {
+  margin: 2px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
