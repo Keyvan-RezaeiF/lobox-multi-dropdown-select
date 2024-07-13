@@ -1,0 +1,130 @@
+.root {
+  position: relative;
+  z-index: 2;
+  width: 400px;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+
+.textInput {
+  border-radius: 12px;
+  padding: 8px 12px;
+  width: 100%;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  outline: none;
+  color: #999;
+  
+  &::-webkit-input-placeholder {
+    color: #CCC;
+  }
+
+  &:focus {
+    box-shadow: 0 0 5pt 2pt #99A8D3;
+  }
+}
+
+.chevron {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+  cursor: pointer;
+  background-color: #FFF;
+
+  svg {
+    vertical-align: middle;
+    background-color: #FFF;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+
+    path {
+      color: #777;
+    }
+  }
+}
+
+.items {
+  border: 1px solid #F2F4FF;
+  border-radius: 12px;
+  margin-top: 8px;
+  max-height: 150px;
+  overflow-y: scroll;
+  padding: 4px 12px;
+  user-select: none;
+  background-color: #FFF;
+  box-shadow: 0 0 5pt 2pt rgb(0 0 0 / 20%);
+  scroll-behavior: smooth;
+}
+
+.item {
+  border-radius: 6px;
+  margin: 4px 0;
+  padding: 2px 8px 2px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #FFF;
+
+  &:hover {
+    background-color: #F2F4FF;
+
+    .itemTitle {
+      color: #7083D0;
+    }
+
+    div {
+      background-color: #F2F4FF;
+    }
+
+    span {
+      background-color: #F2F4FF;
+    }
+
+    .checkStroke {
+      background-color: #F2F4FF;
+      stroke: #7083D0;
+    }
+  }
+
+  div {
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.itemTitle {
+  display: inline-block;
+  background-color: #FFF;
+  margin-right: 4px;
+  color: #777;
+}
+
+.checkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: auto;
+}
+
+.checkStroke {
+  background-color: #FFF;
+  stroke: #333;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
+.noRotate {
+  transform: rotate(0deg);
+}
