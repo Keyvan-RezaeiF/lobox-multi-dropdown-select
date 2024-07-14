@@ -14,12 +14,21 @@ const items = [
 const App: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([])
 
+  const onSelectItem = (selectedItem: Item): void => {
+    setSelectedItems(prev => {
+      if (!prev.find(item => item.id === selectedItem.id)) return [selectedItem, ...prev]
+
+      return prev.filter(item => item.id !== selectedItem.id)
+    })
+  }
+
   return (
     <div className={classes.appContainer}>
       <MultiDropDownSelect
         initialItems={items}
         selectedItems={selectedItems}
-        onSelect={setSelectedItems}
+        onSelect={onSelectItem}
+        displayValue={'title'}
       />
     </div>
   )

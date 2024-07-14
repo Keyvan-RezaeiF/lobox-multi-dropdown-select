@@ -7,11 +7,12 @@ import styles from './styles.module.scss'
 interface MultiDropDownSelectProps {
   initialItems: Item[];
   selectedItems: Item[];
-  onSelect: React.Dispatch<React.SetStateAction<Item[]>>;
+  onSelect: (args: Item) => void;
+  displayValue: string;
 }
 
 const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
-  const { initialItems, onSelect, selectedItems } = props
+  const { initialItems, onSelect, selectedItems, displayValue } = props
   const [items, setItems] = useState<Item[]>(initialItems)
   const [inputValue, setInputValue] = useState<string>('')
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(true)
@@ -24,20 +25,12 @@ const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       setItems(prev => [
-        { id: prev.length + 1, title: inputValue, icon: '🧪', isSelected: false },
+        { id: prev.length + 1, title: inputValue, isSelected: false },
         ...prev
       ])
       setInputValue('')
       itemsRef.current?.scrollTo(0, 0)
     }
-  }
-
-  const onSelectItem = (selectedItem: Item): void => {
-    onSelect(prev => {
-      if (!prev.find(item => item.id === selectedItem.id)) return [selectedItem, ...prev]
-
-      return prev.filter(item => item.id !== selectedItem.id)
-    })
   }
 
   return (
@@ -64,12 +57,12 @@ const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
               {items.map(item => (
                 <div
                   key={item.id}
-                  onClick={() => onSelectItem(item)}
+                  onClick={() => onSelect(item)}
                   className={styles.item}
                 >
                   <div>
-                    <span className={styles.itemTitle}>{item.title}</span>
-                    <div>{item.icon}</div>
+                    <span className={styles.itemTitle}>{(item as any)[displayValue]}</span>
+                    {item.icon && <div>{item.icon}</div>}
                   </div>
                   <div className={styles.checkIcon}>
                     {selectedItems.map(item => item.id).includes(item.id) && (
