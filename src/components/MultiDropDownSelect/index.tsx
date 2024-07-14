@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import BackDrop from '../BackDrop'
 import ChevronUp from '../icons/ChevronUp'
 import Check from '../icons/Check'
@@ -25,7 +26,7 @@ const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       setItems(prev => [
-        { id: prev.length + 1, title: inputValue, isSelected: false },
+        { id: uuidv4(), title: inputValue, isSelected: false },
         ...prev
       ])
       setInputValue('')
