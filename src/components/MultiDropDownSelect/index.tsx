@@ -18,6 +18,7 @@ const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
   const [inputValue, setInputValue] = useState<string>('')
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(true)
   const itemsRef = useRef<HTMLDivElement | null>(null)
+  const [error, setError] = useState<string>('')
 
   const toggleDropDown = (): void => setIsDropDownOpen(prev => !prev)
 
@@ -25,11 +26,18 @@ const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
 
   const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
+      if (!inputValue) {
+        setError('Enter something!')
+
+        return
+      }
+
       setItems(prev => [
         { id: uuidv4(), title: inputValue, isSelected: false },
         ...prev
       ])
       setInputValue('')
+      setError('')
       itemsRef.current?.scrollTo(0, 0)
     }
   }
@@ -75,6 +83,7 @@ const MultiDropDownSelect: React.FC<MultiDropDownSelectProps> = (props) => {
             </div>
           </>
         )}
+        <p className={styles.error}>{error}</p>
       </div>
       {isDropDownOpen && <BackDrop onClick={toggleDropDown} />}
     </>
